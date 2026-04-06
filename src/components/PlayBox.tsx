@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import Cell from "./Cell";
 
 const PlayBox = () => {
-  const winningCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [2, 4, 6],
-    [0, 4, 8],
-  ];
   const [cells, setCells] = useState(["", "", "", "", "", "", "", "", ""]);
   const [go, setGo] = useState("circle");
   const [winningMessage, setWinningMessage] = useState("");
 
   useEffect(() => {
+    const winningCombos = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [2, 4, 6],
+      [0, 4, 8],
+    ];
     winningCombos.forEach((combo) => {
       const circleWinning = combo.every((cell) => cells[cell] === "circle");
       const crossWinning = combo.every((cell) => cells[cell] === "cross");
@@ -32,7 +32,7 @@ const PlayBox = () => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isAllFilled && !winningMessage) setWinningMessage("Draw !");
-  }, [cells, winningMessage]);
+  }, [cells, isAllFilled, winningMessage]);
 
   return (
     <>
